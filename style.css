@@ -1,0 +1,91 @@
+body {
+    font-family: 'Cinzel', serif; /* Fonte medieval */
+    background-color: #D3D3D3;
+    background-image: url('https://i.ibb.co/yBP8X46c/Gemini-Generated-Image-wwlep9wwlep9wwle.jpg'); /* Imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    color: #f5f5f5; /* Cor de texto clara para contraste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+.container {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semitransparente para contraste */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #FFD700; /* Dourado para o título */
+    font-family: 'Cinzel', serif;
+}
+
+button {
+    background-color: #8B4513; /* Cor de fundo marrom escuro para botões */
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Cinzel', serif;
+    position: relative;
+}
+
+#generate-button {
+    margin-top: 10px; /* Distância do título */
+}
+
+#copy-button {
+    margin-top: 10px; /* Distância entre os botões */
+}
+
+button:hover {
+    background-color: #D2691E; /* Cor mais intensa quando o botão é pressionado */
+}
+
+.prompt-box {
+    font-size: 1.5rem;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro para a caixa de prompt */
+    border-radius: 8px;
+    min-height: 300px; /* Aumentando a altura mínima da caixa de prompt */
+    max-width: 100%;
+    word-wrap: break-word;
+    text-align: justify;
+    color: #f5f5f5;
+    font-family: 'Cinzel', serif;
+    z-index: 1;
+    overflow-y: auto; /* Adicionando rolagem se o texto for grande */
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFD700; /* Dourado para a notificação */
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: 'Cinzel', serif;
+    z-index: 3; /* Notificação acima de outros elementos */
+}
