@@ -81,48 +81,35 @@ const keywords = {
     ]
 };
 
-
 // Arrays for beginning and ending prompts (backup)
 let usedBeginnings = [];
 let usedEndings = [];
 
 function randomizeKeywords() {
     const beginnings = [
-        "/imagine prompt: A mighty knight standing at the entrance of a medieval castle, surrounded by",
-        "/imagine prompt: In the heart of a battle-torn landscape, where",
-        "/imagine prompt: Beneath the shadow of a towering castle, there is",
-        "/imagine prompt: A proud crusader raising his sword high above a burning village, where",
-        "/imagine prompt: In the midst of a great crusade, a knight stands ready for battle, surrounded by",
-        "/imagine prompt: As the sun sets over the fortress walls, the air is filled with",
-        "/imagine prompt: In a deep medieval forest, the sound of an approaching army echoes, and",
-        "/imagine prompt: The royal banner flutters high above a grand castle, where",
-        "/imagine prompt: At the crossroads of an ancient kingdom, where",
-        "/imagine prompt: The great hall of a fortified castle is filled with knights and warriors, preparing for",
-        "/imagine prompt: As the great crusaders march towards battle, the path is lined with",
-        "/imagine prompt: The sound of clashing swords echoes through the ancient city walls, and",
-        "/imagine prompt: Beneath the ancient ruins of a crusader fortress, a lone knight stands with",
-        "/imagine prompt: On the edge of a vast battlefield, the banner of the king rises high above the soldiers, where",
-        "/imagine prompt: In a quiet medieval village, the smell of freshly baked bread mixes with the scent of",
-        "/imagine prompt: At the edge of a vast forest, a lonely knight looks towards a distant castle, where"
+        "/imagine prompt: A lone, cloaked figure stands amidst a",
+        "/imagine prompt: In the heart of a surreal landscape, a",
+        "/imagine prompt: Beneath the shadow of a towering cathedral, a",
+        "/imagine prompt: A mysterious wanderer walks through a",
+        "/imagine prompt: In the midst of a desolate wasteland, a",
+        "/imagine prompt: As the sun sets over the ruins, a",
+        "/imagine prompt: In a deep, mystical forest, a",
+        "/imagine prompt: The silhouette of a figure emerges from a",
+        "/imagine prompt: At the edge of a forgotten kingdom, a",
+        "/imagine prompt: The ruins of an ancient temple are guarded by a"
     ];
 
     const endings = [
-        "the land is filled with ash and the remnants of once-great warriors. The scene is tragic and war-torn.",
-        "the light of a dying sun casts an ominous glow over the battlefield, and the echoes of war can still be heard.",
-        "the wind carries the scent of smoke and burning ruins, while the sky is darkened with clouds of war.",
-        "a sense of dread fills the air as the winds howl across the blood-soaked battlefield.",
-        "the horizon glows with the fire of a thousand dying warriors, their memories fading into the history of the kingdom.",
-        "a shroud of darkness hangs over the castle, and the screams of the fallen echo through the halls.",
-        "the earth trembles beneath the march of soldiers, each step bringing them closer to their fate.",
-        "the echo of clashing swords is drowned out by the roars of the surrounding armies, as the battle rages on.",
-        "the once-proud banner of the kingdom flutters in the wind, torn and bloodstained from years of war.",
-        "the world is silent, save for the creaking of the castle walls and the steady march of warriors across the battlefield.",
-        "the whispers of old legends stir in the air, and the heroes of the kingdom rise from the ashes of their past.",
-        "the smoke from burning villages fills the air, and the sound of galloping horses fades into the distance.",
-        "the dark clouds part, revealing a shining knight who rides alone into the heart of the kingdom's fallen glory.",
-        "a lone crusader kneels before a fallen king, sword raised to the sky as the storm clouds begin to clear.",
-        "a great warship drifts silently through fog-covered waters, its hull scarred by battle yet resolute in its mission.",
-        "the final blow is struck, and the kingdom’s fate hangs in the balance, shrouded in uncertainty."
+        "Above, a blood-red sky swirls with ominous clouds. In the distance, a decaying tree stands sentinel.",
+        "The air is thick with an otherworldly presence, and the ground is littered with surreal plants.",
+        "The horizon glows with an ethereal light, casting long shadows across the barren landscape.",
+        "The atmosphere is heavy with mystery, and the faint sound of distant whispers fills the air.",
+        "The scene is both haunting and beautiful, with a surreal blend of natural and unnatural elements.",
+        "The sky is a swirling canvas of dark clouds and crimson hues, creating a dramatic backdrop.",
+        "The ground is cracked and barren, with twisted trees reaching towards the ominous sky.",
+        "The air is filled with an eerie silence, broken only by the faint rustling of surreal plants.",
+        "The landscape is a blend of decay and beauty, with surreal elements scattered throughout.",
+        "The scene is both tranquil and unsettling, with a surreal atmosphere that defies explanation."
     ];
 
     // Select random elements from each array
@@ -137,7 +124,7 @@ function randomizeKeywords() {
     const ending = endings[Math.floor(Math.random() * endings.length)];
 
     // Update the prompt area with the generated prompt
-    promptArea.innerText = `${beginning} ${environment}, ${adjective} ${noun}, wielding a ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending}`;
+    promptArea.innerText = `${beginning} ${environment}, ${adjective} ${noun}, wielding a ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} The human figure stares directly at the viewer, their gaze intense and unwavering. | dvd screengrab, from 1982 dark fantasy film, 'excalibur', and --style DarkFantasy --v 5 --stylize 1000`;
 }
 
 // Add event listeners to the buttons
