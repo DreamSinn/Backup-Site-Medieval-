@@ -1,6 +1,6 @@
 const generateButton = document.getElementById('generate-button');
 const copyButton = document.getElementById('copy-button');
-const promptArea = document.getElementById('prompt-area');
+const promptArea = document.getElementById('prompt-area'); // Corrigi o ID para 'prompt-area'
 const notification = document.getElementById('notification');
 
 // Definir palavras-chave para o tema medieval e das Cruzadas
@@ -81,11 +81,30 @@ const keywords = {
     ]
 };
 
-// Arrays for beginning and ending prompts (backup)
+// Arrays para rastrear itens usados
 let usedBeginnings = [];
 let usedEndings = [];
+let usedEnvironments = [];
+let usedAdjectives = [];
+let usedNouns = [];
+let usedVerbs = [];
+let usedMoodStyle = [];
+let usedTechnicalDescriptive = [];
+let usedColors = [];
 
-function randomizeKeywords() {
+function getRandomItem(array, usedItems) {
+    if (array.length === usedItems.length) {
+        usedItems.length = 0; // Reset se todos os itens foram usados
+    }
+    let item;
+    do {
+        item = array[Math.floor(Math.random() * array.length)];
+    } while (usedItems.includes(item));
+    usedItems.push(item);
+    return item;
+}
+
+function generatePrompt() {
     const beginnings = [
         "/imagine prompt: A lone, cloaked figure stands amidst a",
         "/imagine prompt: In the heart of a surreal landscape, a",
@@ -112,34 +131,44 @@ function randomizeKeywords() {
         "The scene is both tranquil and unsettling, with a surreal atmosphere that defies explanation."
     ];
 
-    // Select random elements from each array
-    const beginning = beginnings[Math.floor(Math.random() * beginnings.length)];
-    const environment = keywords.environments[Math.floor(Math.random() * keywords.environments.length)];
-    const adjective = keywords.adjectives[Math.floor(Math.random() * keywords.adjectives.length)];
-    const noun = keywords.nouns[Math.floor(Math.random() * keywords.nouns.length)];
-    const verb = keywords.verbs[Math.floor(Math.random() * keywords.verbs.length)];
-    const mood = keywords.moodStyle[Math.floor(Math.random() * keywords.moodStyle.length)];
-    const technical = keywords.technicalDescriptive[Math.floor(Math.random() * keywords.technicalDescriptive.length)];
-    const color = keywords.colors[Math.floor(Math.random() * keywords.colors.length)];
-    const ending = endings[Math.floor(Math.random() * endings.length)];
+    // Seleciona elementos únicos
+    const beginning = getRandomItem(beginnings, usedBeginnings);
+    const environment = getRandomItem(keywords.environments, usedEnvironments);
 
-    // Update the prompt area with the generated prompt
-    promptArea.innerText = `${beginning} ${environment}, ${adjective} ${noun}, wielding a ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} The human figure stares directly at the viewer, their gaze intense and unwavering. | dvd screengrab, from 1982 dark fantasy film, 'excalibur', and --style DarkFantasy --v 5 --stylize 1000`;
+    // Garante que o adjetivo e o substantivo não sejam iguais
+    let adjective, noun;
+    do {
+        adjective = getRandomItem(keywords.adjectives, usedAdjectives);
+        noun = getRandomItem(keywords.nouns, usedNouns);
+    } while (adjective === noun);  // Verifica se o adjetivo e o substantivo são iguais
+
+    const verb = getRandomItem(keywords.verbs, usedVerbs);
+    const mood = getRandomItem(keywords.moodStyle, usedMoodStyle);
+    const technical = getRandomItem(keywords.technicalDescriptive, usedTechnicalDescriptive);
+    const color = getRandomItem(keywords.colors, usedColors);
+    const ending = getRandomItem(endings, usedEndings);
+
+    // Gera o prompt
+    const prompt = `${beginning} ${environment}, ${adjective} ${noun}, wielding a ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} The human figure stares directly at the viewer, their gaze intense and unwavering. | dvd screengrab, from 1982 dark fantasy film, 'excalibur', and --style DarkFantasy --v 5 --stylize 1000`;
+
+    // Exibe o prompt na área de texto
+    promptArea.textContent = prompt;
 }
 
-// Add event listeners to the buttons
+
+// Adiciona event listeners aos botões
 generateButton.addEventListener('click', () => {
-    randomizeKeywords();
-    notification.style.display = 'none'; // Hide notification when new prompt is generated
+    generatePrompt();
+    notification.style.display = 'none'; // Oculta a notificação ao gerar novo prompt
 });
 
 copyButton.addEventListener('click', () => {
-    const textToCopy = promptArea.innerText;
+    const textToCopy = promptArea.textContent;
     if (textToCopy) {
         navigator.clipboard.writeText(textToCopy).then(() => {
-            notification.style.display = 'block'; // Show notification when prompt is copied
+            notification.style.display = 'block'; // Mostra a notificação ao copiar
             setTimeout(() => {
-                notification.style.display = 'none'; // Hide notification after a short time
+                notification.style.display = 'none'; // Oculta a notificação após 2 segundos
             }, 2000);
         });
     }
