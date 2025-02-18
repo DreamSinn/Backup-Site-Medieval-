@@ -19,6 +19,13 @@ const keywords = {
         "ancient battlefield", "lost temple", "hidden caves", "sunset coast", "weathered path",
         "open plains", "haunted grove", "overgrown ruins", "shadowed alley"
     ],
+    groupActions: [
+        "a group of knights entering a dark dungeon", "a band of warriors storming a crumbling castle", 
+        "a squad of archers defending a village", "a company of soldiers marching through a forest", 
+        "a party of adventurers exploring ancient ruins", "a cavalry charging across a battlefield", 
+        "a team of mercenaries raiding a fortress", "a group of pilgrims seeking refuge in a chapel", 
+        "a band of rebels ambushing a royal caravan", "a patrol of guards investigating a mysterious cave"
+    ],
     adjectives: [
         "noble", "brave", "fearless", "ancient", "heroic", "valiant", "mighty", "loyal", "sturdy", "honorable",
         "wise", "venerable", "sacred", "fearsome", "unwavering", "regal", "mysterious", "dark", "unyielding", "fierce",
@@ -82,6 +89,7 @@ const keywords = {
 let usedBeginnings = [];
 let usedEndings = [];
 let usedEnvironments = [];
+let usedGroupActions = [];
 let usedAdjectives = [];
 let usedNouns = [];
 let usedVerbs = [];
@@ -142,6 +150,9 @@ function generatePrompt() {
     } while (environment === lastEnvironment);
     lastEnvironment = environment;
 
+    // Seleciona uma ação de grupo única
+    const groupAction = getRandomItem(keywords.groupActions, usedGroupActions);
+
     // Garante que o adjetivo e o substantivo não sejam iguais
     let adjective, noun;
     do {
@@ -167,7 +178,7 @@ function generatePrompt() {
     lastEnding = ending;
 
     // Gera o prompt
-    const prompt = `${beginning} ${environment}, ${adjective} ${noun}, wielding a ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} The human figure stares directly at the viewer, their gaze intense and unwavering. | dvd screengrab, from 1982 medieval film, 'excalibur', and --style Medieval --v 5 --stylize 1000`;
+    const prompt = `${beginning} ${environment}, ${groupAction}, wielding ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} The scene is dynamic, with the group moving cautiously through the environment, their weapons drawn and eyes alert. | dvd screengrab, from 1982 medieval film, 'excalibur', and --style Medieval --v 5 --stylize 1000`;
 
     // Exibe o prompt na área de texto
     promptArea.textContent = prompt;
