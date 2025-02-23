@@ -1,9 +1,9 @@
 const generateButton = document.getElementById('generate-button');
 const copyButton = document.getElementById('copy-button');
-const promptArea = document.getElementById('prompt-area'); // Corrigi o ID para 'prompt-area'
+const promptArea = document.getElementById('prompt-area');
 const notification = document.getElementById('notification');
 
-// Definir palavras-chave para o tema medieval e das Cruzadas
+// Definir palavras-chave para o tema medieval
 const keywords = {
     environments: [
         "desolate battlefield", "crumbling castle", "foggy forest", "dark dungeon", "ancient ruins", 
@@ -150,21 +150,20 @@ function generatePrompt() {
     } while (environment === lastEnvironment);
     lastEnvironment = environment;
 
-    // Seleciona uma ação de grupo única
-    const groupAction = getRandomItem(keywords.groupActions, usedGroupActions);
+    // Decide aleatoriamente se inclui guerreiros (30% de chance)
+    const includeWarriors = Math.random() < 0.3;
 
-    // Garante que o adjetivo e o substantivo não sejam iguais
-    let adjective, noun;
-    do {
-        adjective = getRandomItem(keywords.adjectives, usedAdjectives);
-        noun = getRandomItem(keywords.nouns, usedNouns);
-    } while (adjective === noun);  // Verifica se o adjetivo e o substantivo são iguais
+    let groupAction = "";
+    if (includeWarriors) {
+        groupAction = getRandomItem(keywords.groupActions, usedGroupActions) + ", ";
+    }
 
-    // Garante que o verbo não seja repetido junto ao adjetivo
-    let verb;
-    do {
-        verb = getRandomItem(keywords.verbs, usedVerbs);
-    } while (verb === adjective);  // Verifica se o verbo é igual ao adjetivo
+    // Seleciona um adjetivo e um substantivo
+    const adjective = getRandomItem(keywords.adjectives, usedAdjectives);
+    const noun = getRandomItem(keywords.nouns, usedNouns);
+
+    // Seleciona um verbo
+    const verb = getRandomItem(keywords.verbs, usedVerbs);
 
     const mood = getRandomItem(keywords.moodStyle, usedMoodStyle);
     const technical = getRandomItem(keywords.technicalDescriptive, usedTechnicalDescriptive);
@@ -178,7 +177,7 @@ function generatePrompt() {
     lastEnding = ending;
 
     // Gera o prompt
-    const prompt = `${beginning} ${environment}, ${groupAction}, wielding ${adjective} ${noun}, ready to ${verb}. The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} The scene is dynamic, with the group moving cautiously through the environment, their weapons drawn and eyes alert. | dvd screengrab, from 1982 medieval film, 'excalibur', and --style Medieval --v 5 --stylize 1000`;
+    const prompt = `${beginning} ${environment}, ${groupAction}${includeWarriors ? `wielding ${adjective} ${noun}, ready to ${verb}. ` : ''}The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} | dvd screengrab, from 1982 medieval film, 'excalibur', and --style Medieval --v 5 --stylize 1000`;
 
     // Exibe o prompt na área de texto
     promptArea.textContent = prompt;
