@@ -1,6 +1,5 @@
 const generateButton = document.getElementById('generate-button');
 const promptArea = document.getElementById('prompt-area');
-const negativePromptInput = document.getElementById('negative-prompt');
 const notification = document.getElementById('notification');
 
 // Definir palavras-chave para o tema medieval
@@ -177,30 +176,29 @@ function generatePrompt() {
     lastEnding = ending;
 
     // Gera o prompt
-    const prompt = `${beginning} ${environment}, ${groupAction}${includeWarriors ? `wielding ${adjective} ${noun}, ready to ${verb}. ` : ''}The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending} | dvd screengrab, from 1982 medieval film, 'excalibur', and --style Medieval --v 5 --stylize 1000`;
+    const prompt = `${beginning} ${environment}, ${groupAction}${includeWarriors ? `wielding ${adjective} ${noun}, ready to ${verb}. ` : ''}The atmosphere is ${mood} and filled with ${technical}. The colors are rich with ${color}. ${ending}`;
 
     // Exibe o prompt na área de texto
     promptArea.textContent = prompt;
-
-    // Copia automaticamente o prompt ao gerar
-    copyPrompt();
 }
 
-// Função para copiar o prompt
-function copyPrompt() {
-    const textToCopy = promptArea.textContent;
-    if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            notification.style.display = 'block'; // Mostra a notificação ao copiar
-            setTimeout(() => {
-                notification.style.display = 'none'; // Oculta a notificação após 2 segundos
-            }, 2000);
-        });
-    }
-}
+// Script para copiar o prompt ao clicar na área do prompt
+document.getElementById('prompt-area').addEventListener('click', function () {
+    const promptText = this.innerText; // Pega o texto do prompt
+    navigator.clipboard.writeText(promptText).then(() => {
+        // Exibe a notificação de cópia
+        const notification = document.getElementById('notification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000); // Oculta a notificação após 3 segundos
+    }).catch(err => {
+        console.error('Erro ao copiar o texto: ', err);
+    });
+});
 
-// Adiciona event listener para gerar prompt
-generateButton.addEventListener('click', generatePrompt);
-
-// Adiciona event listener para copiar automaticamente ao clicar na área do prompt
-promptArea.addEventListener('click', copyPrompt);
+// Script para gerar o prompt
+document.getElementById('generate-button').addEventListener('click', function () {
+    generatePrompt();
+    notification.style.display = 'none'; // Oculta a notificação ao gerar novo prompt
+});
