@@ -1,91 +1,166 @@
-body {
-    font-family: 'Cinzel', serif; /* Fonte medieval */
-    background-color: #D3D3D3;
-    background-image: url('https://i.ibb.co/yBP8X46c/Gemini-Generated-Image-wwlep9wwlep9wwle.jpg'); /* Imagem de fundo */
-    background-size: cover;
-    background-position: center;
-    color: #f5f5f5; /* Cor de texto clara para contraste */
+/* Reset básico */
+body, html {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    text-align: center;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'MedievalSharp', cursive;
+    color: #E0E0E0;
+    background-color: #1a1a1a; /* Cor de fundo de fallback */
 }
 
+/* Vídeo de fundo */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+    overflow: hidden;
+}
+
+#video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw; /* 100% da largura da viewport */
+    height: 100vh; /* 100% da altura da viewport */
+    transform: translate(-50%, -50%); /* Centraliza o vídeo */
+    min-width: 100%; /* Garante que cubra a largura */
+    min-height: 100%; /* Garante que cubra a altura */
+    object-fit: cover; /* Corta o vídeo para cobrir a área */
+}
+
+/* Contêiner principal */
 .container {
-    padding: 30px;
-    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semitransparente para contraste */
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    width: 80%;
-    max-width: 600px;
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Coloca o conteúdo na frente do vídeo */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+    margin: 20px auto; /* Margem automática para alinhar ao centro horizontalmente */
 }
 
+/* Título */
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #FFD700; /* Dourado para o título */
     font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #FFD700; /* Dourado para o título */
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+    margin-bottom: 20px;
 }
 
+header p {
+    font-size: 1.2rem;
+    color: #f5f5f5;
+    margin-bottom: 20px;
+}
+
+/* Área do prompt */
+#prompt-area {
+    padding: 20px;
+    border: 2px solid #8B4513; /* Borda marrom escura */
+    background-color: rgba(34, 34, 34, 0.7); /* Fundo semi-transparente */
+    font-family: 'Courier New', monospace;
+    color: #E0E0E0;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: glow 3s infinite;
+    height: 150px; /* Altura fixa */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
+    width: 100%; /* Ocupa toda a largura do container */
+    box-sizing: border-box; /* Inclui padding e borda na largura */
+}
+
+/* Animação de brilho */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px #8B4513; }
+    50% { box-shadow: 0 0 20px #8B4513; }
+    100% { box-shadow: 0 0 10px #8B4513; }
+}
+
+/* Botão */
 button {
-    background-color: #8B4513; /* Cor de fundo marrom escuro para botões */
+    padding: 10px 20px;
+    background-color: #8B4513; /* Marrom escuro */
     color: #fff;
     border: none;
-    padding: 12px 24px;
-    margin: 10px;
-    font-size: 1.2rem;
-    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
     font-family: 'Cinzel', serif;
-    position: relative;
-}
-
-#generate-button {
-    margin-top: 10px; /* Distância do título */
-}
-
-#copy-button {
-    margin-top: 10px; /* Distância entre os botões */
+    margin-top: 20px;
 }
 
 button:hover {
-    background-color: #D2691E; /* Cor mais intensa quando o botão é pressionado */
+    background-color: #D2691E; /* Marrom mais claro ao passar o mouse */
+    transform: scale(1.05);
 }
 
-.prompt-box {
-    font-size: 1.5rem;
-    margin-top: 40px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro para a caixa de prompt */
-    border-radius: 8px;
-    min-height: 300px; /* Aumentando a altura mínima da caixa de prompt */
-    max-width: 100%;
-    word-wrap: break-word;
-    text-align: justify;
-    color: #f5f5f5;
+/* Grupo de entrada (textarea) */
+.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #FFD700; /* Dourado para o label */
     font-family: 'Cinzel', serif;
-    z-index: 1;
-    overflow-y: auto; /* Adicionando rolagem se o texto for grande */
+    font-size: 1.2rem;
 }
 
+.input-group textarea {
+    width: 100%;
+    max-width: 100%; /* Ocupa toda a largura do container */
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid #8B4513; /* Borda marrom escura */
+    background-color: rgba(34, 34, 34, 0.7); /* Fundo semi-transparente */
+    color: #e0e0e0;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    background-blend-mode: overlay;
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+.input-group textarea:focus {
+    border-color: #D2691E; /* Marrom mais claro ao focar */
+    box-shadow: 0 0 10px #D2691E;
+}
+
+.input-group textarea:hover {
+    transform: scale(1.02);
+}
+
+/* Notificação */
 .notification {
-    display: none;
     position: fixed;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #FFD700; /* Dourado para a notificação */
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    font-family: 'Cinzel', serif;
-    z-index: 3; /* Notificação acima de outros elementos */
+    right: 20px;
+    background-color: #8B4513; /* Marrom escuro */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: none; /* Inicialmente oculta */
+    font-size: 14px;
+    z-index: 1000;
 }

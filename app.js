@@ -1,6 +1,6 @@
 const generateButton = document.getElementById('generate-button');
-const copyButton = document.getElementById('copy-button');
 const promptArea = document.getElementById('prompt-area');
+const negativePromptInput = document.getElementById('negative-prompt');
 const notification = document.getElementById('notification');
 
 // Definir palavras-chave para o tema medieval
@@ -181,15 +181,13 @@ function generatePrompt() {
 
     // Exibe o prompt na área de texto
     promptArea.textContent = prompt;
+
+    // Copia automaticamente o prompt ao gerar
+    copyPrompt();
 }
 
-// Adiciona event listeners aos botões
-generateButton.addEventListener('click', () => {
-    generatePrompt();
-    notification.style.display = 'none'; // Oculta a notificação ao gerar novo prompt
-});
-
-copyButton.addEventListener('click', () => {
+// Função para copiar o prompt
+function copyPrompt() {
     const textToCopy = promptArea.textContent;
     if (textToCopy) {
         navigator.clipboard.writeText(textToCopy).then(() => {
@@ -199,4 +197,10 @@ copyButton.addEventListener('click', () => {
             }, 2000);
         });
     }
-});
+}
+
+// Adiciona event listener para gerar prompt
+generateButton.addEventListener('click', generatePrompt);
+
+// Adiciona event listener para copiar automaticamente ao clicar na área do prompt
+promptArea.addEventListener('click', copyPrompt);
