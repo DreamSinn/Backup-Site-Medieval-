@@ -6,7 +6,6 @@ body, html {
     overflow: hidden;
     font-family: 'MedievalSharp', cursive;
     color: #E0E0E0;
-    background-color: #1a1a1a; /* Cor de fundo de fallback */
 }
 
 /* Vídeo de fundo */
@@ -44,15 +43,15 @@ body, html {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
-    margin: 20px auto; /* Margem automática para alinhar ao centro horizontalmente */
+    margin: 20px auto; /* Centraliza o contêiner */
 }
 
 /* Título */
 h1 {
     font-family: 'Cinzel', serif;
     font-size: 2.5rem;
-    color: #FFD700; /* Dourado para o título */
-    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+    color: #FFD700; /* Dourado */
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700; /* Efeito de brilho */
     margin-bottom: 20px;
 }
 
@@ -72,11 +71,13 @@ header p {
     margin-top: 20px;
     border-radius: 5px;
     cursor: pointer;
-    animation: glow 3s infinite;
+    animation: glow 3s infinite; /* Animação de brilho */
     height: 150px; /* Altura fixa */
     overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
     width: 100%; /* Ocupa toda a largura do container */
     box-sizing: border-box; /* Inclui padding e borda na largura */
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png'); /* Textura de papel */
+    background-blend-mode: overlay;
 }
 
 /* Animação de brilho */
@@ -102,7 +103,7 @@ button {
 
 button:hover {
     background-color: #D2691E; /* Marrom mais claro ao passar o mouse */
-    transform: scale(1.05);
+    transform: scale(1.05); /* Efeito de escala ao passar o mouse */
 }
 
 /* Grupo de entrada (textarea) */
@@ -118,18 +119,18 @@ button:hover {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #FFD700; /* Dourado para o label */
+    color: #e0e0e0;
     font-family: 'Cinzel', serif;
     font-size: 1.2rem;
 }
 
 .input-group textarea {
     width: 100%;
-    max-width: 100%; /* Ocupa toda a largura do container */
+    max-width: 600px;
     padding: 15px;
     border-radius: 5px;
-    border: 2px solid #8B4513; /* Borda marrom escura */
-    background-color: rgba(34, 34, 34, 0.7); /* Fundo semi-transparente */
+    border: 2px solid #8B4513;;
+    background-color: rgba(34, 34, 34, 0.9);
     color: #e0e0e0;
     font-size: 14px;
     resize: vertical;
@@ -143,8 +144,8 @@ button:hover {
 }
 
 .input-group textarea:focus {
-    border-color: #D2691E; /* Marrom mais claro ao focar */
-    box-shadow: 0 0 10px #D2691E;
+    border-color: #8B0000;
+    box-shadow: 0 0 10px #8B0000;
 }
 
 .input-group textarea:hover {
