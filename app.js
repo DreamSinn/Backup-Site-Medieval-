@@ -113,7 +113,7 @@ function generatePrompt() {
     // Add negative prompt if provided
     const negativePrompt = negativePromptInput.value.trim();
     if (negativePrompt) {
-        prompt += ` --no ${negativePrompt}`;
+        prompt += ` --no ${negativePrompt}`; // Adiciona o negative prompt exatamente como foi digitado
     }
 
     promptArea.textContent = prompt;
