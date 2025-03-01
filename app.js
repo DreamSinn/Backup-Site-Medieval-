@@ -4,300 +4,128 @@ const notification = document.getElementById('notification');
 const negativePromptInput = document.getElementById('negative-prompt');
 
 const keywords = {
-    figures: {
-        humans: [
-            "A lone, cloaked figure", "A wandering warrior", "A ghostly apparition", "A weary traveler",
-            "A spectral knight", "A hooded wanderer", "A shadowy sentinel", "A forsaken soul"
-        ],
-        monsters: [
-            "A towering eldritch horror", "A grotesque, many-eyed beast", "A twisted nightmare creature",
-            "A wraith-like entity", "A shadowy demon with glowing eyes", "A malformed horror with shifting limbs",
-            "A skeletal reaper draped in shadows", "A monstrous aberration lurking in the void"
-        ],
-        elves: [
-            "A graceful elven archer", "A mysterious elven mage", "A serene elven druid", "A fierce elven warrior",
-            "A shadowy elven assassin", "A noble elven lord", "A wise elven sage", "A melancholic elven bard"
-        ],
-        dwarves: [
-            "A stout dwarven blacksmith", "A gruff dwarven miner", "A battle-hardened dwarven warrior",
-            "A cunning dwarven rogue", "A jovial dwarven brewer", "A stoic dwarven guard", "A wise dwarven elder",
-            "A fierce dwarven berserker"
-        ],
-        orcs: [
-            "A brutal orc warlord", "A savage orc berserker", "A cunning orc shaman", "A fearsome orc raider",
-            "A battle-scarred orc veteran", "A hulking orc brute", "A stealthy orc scout", "A menacing orc chieftain"
-        ],
-        hobbits: [
-            "A cheerful hobbit gardener", "A curious hobbit adventurer", "A brave hobbit burglar",
-            "A jovial hobbit innkeeper", "A wise hobbit elder", "A mischievous hobbit trickster",
-            "A determined hobbit traveler", "A humble hobbit farmer"
-        ],
-        ents: [
-            "A towering, ancient ent", "A wise, slow-speaking tree shepherd", "A vengeful, wrathful ent",
-            "A gentle, moss-covered ent", "A mysterious, whispering ent", "A protective, forest guardian ent",
-            "A weathered, bark-covered ent", "A sorrowful, mourning ent"
-        ],
-        dragons: [
-            "A colossal, fire-breathing dragon", "A sleek, ice-winged dragon", "A shadowy, poison-dripping dragon",
-            "A golden, treasure-hoarding dragon", "A wise, ancient dragon", "A ferocious, battle-scarred dragon",
-            "A mystical, arcane dragon", "A cursed, undead dragon"
-        ],
-        goblins: [
-            "A sneaky, green-skinned goblin", "A cunning, trap-setting goblin", "A vicious, dagger-wielding goblin",
-            "A mischievous, thieving goblin", "A cowardly, cowering goblin", "A brutish, club-wielding goblin",
-            "A shamanistic, spell-casting goblin", "A chittering, pack-hunting goblin"
-        ],
-        trolls: [
-            "A hulking, cave-dwelling troll", "A dim-witted, boulder-throwing troll", "A vicious, bridge-guarding troll",
-            "A regenerating, forest troll", "A cursed, stone troll", "A massive, mountain troll",
-            "A swamp-dwelling, mud-covered troll", "A fire-resistant, magma troll"
-        ],
-        fairies: [
-            "A tiny, glowing fairy", "A mischievous, prankster fairy", "A wise, ancient fairy",
-            "A protective, nature-bound fairy", "A cursed, dark fairy", "A playful, sparkling fairy",
-            "A vengeful, thorn-covered fairy", "A mystical, moonlit fairy"
-        ],
-        demons: [
-            "A towering, horned demon", "A shadowy, soul-stealing demon", "A fiery, lava-covered demon",
-            "A cunning, contract-making demon", "A grotesque, multi-headed demon", "A cursed, plague-bearing demon",
-            "A seductive, illusion-casting demon", "A wrathful, war-bringing demon"
-        ],
-        darkElves: [
-            "A shadowy, dark elven assassin", "A ruthless, dark elven warlord", "A cunning, dark elven sorcerer",
-            "A vengeful, dark elven priestess", "A stealthy, dark elven ranger", "A noble, dark elven lord",
-            "A cursed, dark elven outcast", "A mysterious, dark elven spy"
-        ],
-        halfElves: [
-            "A charismatic, half-elven bard", "A skilled, half-elven ranger", "A wise, half-elven mage",
-            "A determined, half-elven warrior", "A mysterious, half-elven traveler", "A conflicted, half-elven rogue",
-            "A noble, half-elven diplomat", "A cursed, half-elven wanderer"
-        ],
-        werewolves: [
-            "A ferocious, full-moon werewolf", "A cursed, transforming werewolf", "A pack-leading, alpha werewolf",
-            "A stealthy, forest-dwelling werewolf", "A vengeful, cursed werewolf", "A noble, controlled werewolf",
-            "A savage, bloodthirsty werewolf", "A mystical, spirit-bound werewolf"
-        ],
-        vampires: [
-            "A seductive, immortal vampire", "A cursed, blood-drinking vampire", "A noble, ancient vampire lord",
-            "A vengeful, vampire hunter turned vampire", "A stealthy, shadow-dwelling vampire",
-            "A powerful, hypnotic vampire", "A cursed, sunlight-fearing vampire", "A mystical, bat-transforming vampire"
-        ],
-        elementals: [
-            "A raging, fire elemental", "A serene, water elemental", "A sturdy, earth elemental",
-            "A swirling, air elemental", "A mystical, arcane elemental", "A cursed, shadow elemental",
-            "A protective, nature elemental", "A chaotic, storm elemental"
-        ],
-        giants: [
-            "A towering, mountain giant", "A fierce, frost giant", "A brutal, hill giant",
-            "A wise, ancient giant", "A cursed, fire giant", "A protective, forest giant",
-            "A vengeful, storm giant", "A mystical, cloud giant"
-        ]
-    },
     environments: [
-        "desolate wasteland", "abandoned battlefield", "crumbling city ruins", "haunted moor",
-        "twisted forest", "barren tundra", "forgotten catacombs", "ancient, crumbling temple",
-        "obsidian caverns", "cursed graveyard", "ethereal abyss", "forsaken chapel"
+        "medieval castle", "dark forest", "ancient ruins", "stone fortress", "mystic village", "dragon's lair", "enchanted woods",
+        "gothic cathedral", "haunted graveyard", "royal palace", "wizard's tower", "battlefield", "mountain stronghold", "hidden cave",
+        "cursed swamp", "viking village", "medieval town square", "knight's keep", "ancient library", "forgotten temple", "dwarven mine",
+        "elven sanctuary", "witch's hut", "royal court", "dark dungeon", "enchanted lake", "mystic portal", "ancient battlefield",
+        "shadowy valley", "frosted peaks", "deserted village", "cursed ruins", "sacred grove", "dragon's peak", "wizard's laboratory",
+        "haunted castle", "royal garden", "ancient crypt", "mystic waterfall", "enchanted meadow", "dark citadel", "knight's training ground",
+        "viking longhouse", "medieval marketplace", "ancient observatory", "forgotten shrine", "dwarven forge", "elven treehouse",
+        "witch's cauldron", "royal banquet hall", "dark catacombs", "enchanted river", "mystic glade", "ancient battlefield"
     ],
-    landscapeDetails: [
-        "jagged rocks", "withered trees", "cracked earth", "sunken ruins", "scattered bones",
-        "broken statues", "ashen ground", "twisted roots", "blackened spires", "haunted torches",
-        "eldritch symbols", "ritual circles", "drifting mist", "blood-soaked soil"
+    adjectives: [
+        "dark", "mysterious", "ancient", "forgotten", "enchanted", "haunted", "cursed", "royal", "gothic", "shadowy",
+        "frosted", "sacred", "dwarven", "elven", "wizardly", "knightly", "viking", "medieval", "mystic", "barbaric",
+        "heroic", "legendary", "mythical", "epic", "ominous", "ethereal", "majestic", "spiritual", "divine", "arcane",
+        "sorcerous", "dragonborn", "warrior-like", "chivalrous", "feudal", "rustic", "timeless", "grandiose", "mystical",
+        "shadowed", "frostbitten", "sacrosanct", "dwarfish", "elvish", "wizardly", "knightly", "viking", "medieval", "mystic"
     ],
-    skies: [
-        "a blood-red sky", "a swirling vortex of darkness", "a starless void", "a sky choked with smoke",
-        "a twilight haze", "a sky ablaze with crimson and violet", "a storm of obsidian clouds",
-        "a celestial abyss", "a spectral aurora casting eerie glows", "a sickly green atmosphere"
-    ],
-    distantElements: [
-        "a decaying tree stands sentinel", "a ruined tower crumbles in the distance", "an ancient monolith glows faintly",
-        "a spectral figure watches from afar", "a broken gateway stands eerily silent",
-        "a mist-covered mountain looms in the horizon", "a flickering lantern sways in the wind",
-        "a cursed shrine hums with an unnatural glow", "a forsaken chapel whispers forgotten prayers",
-        "a shadowy figure moves within the ruins", "a phantom beacon emits an eerie pulse"
-    ],
-    gazeDirection: [
-        "staring directly at the viewer", "gazing towards the camera with hollow eyes",
-        "fixing an unsettling glare at you", "its piercing gaze locked onto the observer",
-        "watching with an unreadable expression", "its eyes glowing ominously, focused on you",
-        "its twisted face turned towards the lens, as if aware of being watched"
+    nouns: [
+        "castle", "forest", "ruins", "fortress", "village", "dragon", "woods", "cathedral", "graveyard", "palace",
+        "tower", "battlefield", "stronghold", "cave", "swamp", "keep", "library", "temple", "mine", "sanctuary",
+        "hut", "court", "dungeon", "lake", "portal", "valley", "peaks", "crypt", "waterfall", "meadow", "citadel",
+        "training ground", "longhouse", "marketplace", "observatory", "shrine", "forge", "treehouse", "cauldron",
+        "banquet hall", "catacombs", "river", "glade", "battlefield", "knight", "wizard", "witch", "dwarf", "elf",
+        "viking", "king", "queen", "prince", "princess", "warrior", "mage", "rogue", "cleric", "bard", "druid", "sorcerer"
     ],
     verbs: [
-        "lurking", "swirling", "drifting", "whispering", "echoing", "pulsing", "flickering", "glowing",
-        "shifting", "crumbling", "decaying", "haunting", "twisting", "shattering", "summoning", "invoking"
+        "battle", "defend", "conquer", "explore", "summon", "cast", "forge", "protect", "destroy", "curse",
+        "enchant", "haunt", "resurrect", "train", "lead", "rule", "worship", "pray", "meditate", "study",
+        "brew", "alchemize", "transform", "travel", "quest", "hunt", "track", "ambush", "raid", "pillage",
+        "build", "repair", "guard", "scout", "negotiate", "betray", "ally", "fight", "retreat", "advance",
+        "celebrate", "mourn", "sacrifice", "bless", "curse", "heal", "revive", "summon", "banish", "teleport"
     ],
     moodStyle: [
-        "dramatic", "eerie", "foreboding", "unsettling", "oppressive", "terrifying", "hellish", "haunted",
-        "melancholic", "surreal", "macabre", "sinister", "bleak", "ethereal", "forgotten", "cursed"
+        "dark and ominous", "mysterious and foreboding", "ancient and forgotten", "enchanted and magical", "haunted and cursed",
+        "royal and grandiose", "gothic and shadowy", "frosted and cold", "sacred and divine", "dwarven and sturdy",
+        "elven and ethereal", "wizardly and arcane", "knightly and chivalrous", "viking and barbaric", "medieval and rustic",
+        "mystic and spiritual", "heroic and legendary", "mythical and epic", "ominous and eerie", "ethereal and majestic",
+        "spiritual and divine", "arcane and sorcerous", "dragonborn and fierce", "warrior-like and brave", "chivalrous and noble",
+        "feudal and traditional", "rustic and timeless", "grandiose and majestic", "mystical and enchanting", "shadowed and dark",
+        "frostbitten and cold", "sacrosanct and holy", "dwarfish and strong", "elvish and graceful", "wizardly and wise",
+        "knightly and honorable", "viking and fierce", "medieval and historic", "mystic and otherworldly"
     ],
     technicalDescriptive: [
-        "4K, limited color palette (purple, yellow, blacks)", "granular textures, dramatic lighting",
-        "muted, desaturated tones, ethereal glow", "high contrast shadows, fog-drenched atmosphere",
-        "deep blacks, neon highlights, surreal depth", "cinematic composition, moody lighting",
-        "gloomy ambiance, sharp details, subtle highlights", "twilight glow, phantom-like atmosphere",
-        "misty outlines, sharp silhouettes, eerie depth", "rusted metal textures, decayed stone details",
-        "writhing shapes, unseen forces in the shadows"
+        "dark details", "mysterious lighting", "gothic colors", "ethereal atmosphere", "ancient patterns", "forgotten textures",
+        "enchanted aura", "haunted details", "cursed contrasts", "royal edges", "gothic glow", "shadowy textures", "frosted environment",
+        "sacred color palette", "dwarven light effect", "elven look", "wizardly textures", "knightly glow", "viking atmosphere",
+        "medieval softness", "mystic vibrancy", "heroic warmth", "legendary polish", "mythical watery feel", "epic glistening",
+        "ominous richness", "ethereal tones", "majestic water-soaked", "spiritual filmic finish", "divine glittering hue",
+        "arcane soft glow", "sorcerous dreamlike light", "dragonborn blurred edges", "warrior-like softness", "chivalrous vibrant effect",
+        "feudal glimmering", "rustic sharp detailing", "timeless milky hues", "grandiose lush contrast", "mystical whispery effect",
+        "shadowed emollient texture", "frostbitten deep tones", "sacrosanct brushed light", "dwarfish clear-cut textures",
+        "elvish bright overlay", "wizardly playful edge", "knightly vibrating hues", "viking rich detail", "medieval sunny warmth",
+        "mystic aerial view", "heroic soft brushstrokes", "legendary shining contour", "mythical cool shadows", "epic color blends",
+        "ominous glassy texture", "ethereal vintage vibe"
     ],
-    beginnings: [
-        "The sky is black, a dark fantasy scene with", 
-        "In the darkness of night, a twisted landscape emerges, where", 
-        "Beneath a pitch-black sky, a forbidding scene unfolds with", 
-        "In the void of a dark sky, a haunting scene surrounds a",
-        "Under a blackened sky, a forsaken world unfolds, filled with", 
-        "Above, the void of blackness deepens, and from it, monstrous forms emerge."
-    ],
-    endings: [
-        " This color scheme heightens the sense of doom and mystery, as though the very air is thick with malevolent energy.",
-        " The atmosphere is charged with a suffocating energy, leaving the senses overwhelmed and tense.",
-        " The darkness thickens, casting every detail in shadow as unseen eyes watch.",
-        " Shadows move where they shouldn’t, and the very ground seems to shift beneath your feet.",
-        " The air crackles with malevolent energy, as though the very world itself is twisted.",
-        " The world trembles, as if some great evil stirs in the depths of the unknown.",
-        " A chill fills the air, and the very essence of the place feels corrupted.",
-        " The haunting silence is broken only by the sound of distant whispers, as if the land itself is alive.",
-        " A sense of dread envelops the scene, as though time itself has stopped in this cursed place.",
-        " A malevolent presence hovers over the scene, its influence palpable in every shadow."
+    colors: [
+        "dark crimson", "midnight blue", "forest green", "obsidian black", "royal purple", "blood red", "emerald green", "golden yellow",
+        "silver gray", "bronze brown", "iron gray", "stone gray", "shadow black", "frost white", "sacred gold", "dwarven bronze",
+        "elven silver", "wizardly purple", "knightly red", "viking blue", "medieval brown", "mystic green", "heroic gold", "legendary silver",
+        "mythical bronze", "epic crimson", "ominous black", "ethereal white", "majestic purple", "spiritual gold", "divine silver",
+        "arcane green", "sorcerous blue", "dragonborn red", "warrior-like black", "chivalrous gold", "feudal silver", "rustic brown",
+        "timeless gray", "grandiose purple", "mystical green", "shadowed black", "frostbitten white", "sacrosanct gold", "dwarfish bronze",
+        "elvish silver", "wizardly purple", "knightly red", "viking blue", "medieval brown", "mystic green"
     ]
 };
 
-let usedBeginnings = [];
-let usedEndings = [];
-let usedFigures = {
-    humans: [], monsters: [], elves: [], dwarves: [], orcs: [], hobbits: [], ents: [], dragons: [],
-    goblins: [], trolls: [], fairies: [], demons: [], darkElves: [], halfElves: [], werewolves: [],
-    vampires: [], elementals: [], giants: []
-};
-let usedEnvironments = [];
-let usedLandscapeDetails = [];
-let usedSkies = [];
-let usedDistantElements = [];
-let usedGazeDirection = [];
-let usedVerbs = [];
-let usedMoodStyle = [];
-let usedTechnicalDescriptive = [];
+const beginnings = [
+    "In the heart of the ", "Beneath the towering ", "On the edge of the ", "Within the ancient ", "Amidst the ruins of the ",
+    "At the foot of the ", "Through the dark ", "Under the shadow of the ", "At the peak of the ", "In the depths of the ",
+    "Along the path to the ", "Within the walls of the ", "At the gates of the ", "In the shadow of the ", "Beyond the borders of the ",
+    "In the center of the ", "At the entrance to the ", "Within the halls of the ", "At the edge of the ", "In the midst of the ",
+    "Under the protection of the ", "In the ruins of the ", "At the base of the ", "In the heart of the ", "Within the confines of the ",
+    "At the top of the ", "In the depths of the ", "Along the shores of the ", "Within the forests of the ", "At the foot of the ",
+    "In the shadow of the ", "Beyond the reach of the ", "In the center of the ", "At the entrance to the ", "Within the halls of the ",
+    "At the edge of the ", "In the midst of the ", "Under the protection of the ", "In the ruins of the ", "At the base of the ",
+    "In the heart of the ", "Within the confines of the ", "At the top of the ", "In the depths of the ", "Along the shores of the ",
+    "Within the forests of the ", "At the foot of the ", "In the shadow of the ", "Beyond the reach of the "
+];
 
-let counter = 0;
+const endings = [
+    "where darkness reigns supreme.", "where legends are born.", "where the past comes alive.", "where magic flows freely.",
+    "where the brave dare to tread.", "where the cursed linger.", "where the ancient ones sleep.", "where the shadows whisper.",
+    "where the dragons soar.", "where the knights rise.", "where the wizards weave their spells.", "where the witches brew their potions.",
+    "where the dwarves forge their weapons.", "where the elves sing their songs.", "where the vikings set sail.", "where the kings rule.",
+    "where the queens reign.", "where the warriors train.", "where the mages study.", "where the rogues plot.", "where the clerics pray.",
+    "where the bards sing.", "where the druids commune.", "where the sorcerers cast their spells.", "where the undead rise.",
+    "where the living fear to go.", "where the brave find glory.", "where the weak perish.", "where the strong thrive.", "where the cursed are bound.",
+    "where the ancient ones awaken.", "where the shadows grow darker.", "where the dragons guard their treasure.", "where the knights face their destiny.",
+    "where the wizards unlock their secrets.", "where the witches cast their curses.", "where the dwarves mine their riches.", "where the elves protect their realm.",
+    "where the vikings raid and pillage.", "where the kings wage war.", "where the queens forge alliances.", "where the warriors find honor.",
+    "where the mages discover new magic.", "where the rogues steal their fortunes.", "where the clerics heal the wounded.", "where the bards tell their tales.",
+    "where the druids protect the balance.", "where the sorcerers unleash their power.", "where the undead seek vengeance.", "where the living fight for survival."
+];
 
-function getRandomItem(array, usedItems) {
-    if (array.length === usedItems.length) {
-        usedItems.length = 0; // Reset se todos os itens foram usados
-    }
-    let item;
-    do {
-        item = array[Math.floor(Math.random() * array.length)];
-    } while (usedItems.includes(item));
-    usedItems.push(item);
-    return item;
-}
-
-// Função para formatar os negative prompts
-function formatNegativePrompts(input) {
-    if (!input) return ''; // Retorna vazio se não houver input
-
-    // Remove espaços extras e divide os termos por vírgulas, espaços ou quebras de linha
-    const terms = input
-        .split(/[,\s\n]+/) // Divide por vírgulas, espaços ou quebras de linha
-        .map(term => term.trim()) // Remove espaços extras
-        .filter(term => term.length > 0); // Remove termos vazios
-
-    // Junta os termos com vírgulas
-    return terms.join(', ');
-}
-
-// Função para verificar se um termo está presente no prompt
-function containsNegativePrompt(prompt, negativePrompts) {
-    if (!negativePrompts) return false;
-    return negativePrompts.split(',').some(term => prompt.toLowerCase().includes(term.trim().toLowerCase()));
-}
-
-function generateLandscapePrompt(negativePrompts) {
-    let newPrompt;
-
-    do {
-        newPrompt = "/imagine prompt: ";
-        
-        // Escolhe um início único
-        newPrompt += `${getRandomItem(keywords.beginnings, usedBeginnings)} `;
-        
-        // Gera uma paisagem sem figuras
-        newPrompt += `a ${getRandomItem(keywords.environments, usedEnvironments)} of ${getRandomItem(keywords.landscapeDetails, usedLandscapeDetails)}, `;
-        newPrompt += `${getRandomItem(keywords.verbs, usedVerbs)} `;
-        newPrompt += `${getRandomItem(keywords.moodStyle, usedMoodStyle)} `;
-        newPrompt += `${getRandomItem(keywords.technicalDescriptive, usedTechnicalDescriptive)}. `;
-
-        // Escolhe um final único
-        newPrompt += getRandomItem(keywords.endings, usedEndings);
-        
-        // Adiciona as palavras obrigatórias
-        newPrompt += " --ar 9:16 --v 5 --stylize 1000 --style Medieval";
-    } while (containsNegativePrompt(newPrompt, negativePrompts)); // Repete se o prompt contiver termos negativos
-
-    return newPrompt;
+function getRandomElement(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function generatePrompt() {
-    console.log("Função generatePrompt() chamada!");
-
-    // Obtém e formata os Negative Prompts inseridos pelo usuário
-    const formattedNegativePrompts = formatNegativePrompts(negativePromptInput.value);
-
-    let newPrompt;
-
-    // Decide aleatoriamente se o prompt será uma paisagem ou incluirá figuras
-    if (Math.random() < 0.5) {
-        newPrompt = generateLandscapePrompt(formattedNegativePrompts);
-    } else {
-        do {
-            newPrompt = "/imagine prompt: ";
-            
-            // Escolhe um início único
-            newPrompt += `${getRandomItem(keywords.beginnings, usedBeginnings)} `;
-            
-            // Alterna entre as raças
-            const races = Object.keys(keywords.figures);
-            let figureType = races[counter % races.length];
-            let figure = getRandomItem(keywords.figures[figureType], usedFigures[figureType]);
-            
-            newPrompt += `${figure}, positioned close to the viewer, `;
-
-            // Evita repetir os mesmos ambientes e terminações
-            let environment = getRandomItem(keywords.environments, usedEnvironments);
-            let ending = getRandomItem(keywords.endings, usedEndings);
-
-            newPrompt += `stands amidst ${environment} of ${getRandomItem(keywords.landscapeDetails, usedLandscapeDetails)}, `;
-            newPrompt += `${getRandomItem(keywords.verbs, usedVerbs)} `;
-            newPrompt += `${getRandomItem(keywords.moodStyle, usedMoodStyle)} `;
-            newPrompt += `${getRandomItem(keywords.technicalDescriptive, usedTechnicalDescriptive)}. `;
-
-            // Adiciona a direção do olhar para a câmera
-            newPrompt += `${figure} is ${getRandomItem(keywords.gazeDirection, usedGazeDirection)}. `;
-
-            // Escolhe um final único
-            newPrompt += ending;
-            
-            // Adiciona as palavras obrigatórias
-            newPrompt += " --ar 9:16 --v 5 --stylize 1000 --style Medieval";
-        } while (containsNegativePrompt(newPrompt, formattedNegativePrompts)); // Repete se o prompt contiver termos negativos
-    }
-
-    counter++; // Incrementa o contador para alternar entre as raças
+    let prompt = `/imagine prompt: ${getRandomElement(beginnings)}${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} over a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
     
-    // Adiciona os negative prompts formatados ao final do prompt
-    if (formattedNegativePrompts) {
-        newPrompt += ` ${formattedNegativePrompts}`;
+    // Check length, ensure it meets the 400 character requirement
+    while (prompt.length < 400) {
+        prompt += ` ${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} over a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
     }
 
-    return newPrompt;
+    // Add negative prompt if provided
+    const negativePrompt = negativePromptInput.value.trim();
+    if (negativePrompt) {
+        prompt += ` --no ${negativePrompt}`;
+    }
+
+    promptArea.textContent = prompt;
 }
 
-generateButton.addEventListener('click', function() {
-    console.log("Botão Gerar clicado!");
-    promptArea.textContent = generatePrompt();
-});
+generateButton.addEventListener('click', generatePrompt);
 
-// Adiciona a funcionalidade de copiar ao clicar na área de prompt
-promptArea.addEventListener('click', function() {
-    if (promptArea.textContent.trim() !== "Your generated prompt will appear here.") {
-        navigator.clipboard.writeText(promptArea.textContent).then(function() {
+// Copiar o prompt ao clicar na área do prompt
+promptArea.addEventListener('click', () => {
+    const promptText = promptArea.textContent;
+    if (promptText) {
+        navigator.clipboard.writeText(promptText).then(() => {
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
