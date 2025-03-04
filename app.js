@@ -2,18 +2,26 @@ const generateButton = document.getElementById('generate-button');
 const promptArea = document.getElementById('prompt-area');
 const notification = document.getElementById('notification');
 const negativePromptInput = document.getElementById('negative-prompt');
+const generatedTitle = document.getElementById('generated-title');
+
+const emojis = ["⚔️", "🛡️", "🐉", "🔥", "🌑", "🌕", "🖤", "💀", "👑", "🏰", "🌋", "🌌"];
+
+const hashtags = [
+    "#Medieval", "#MedievalArt", "#MedievalFantasy", "#MedievalWorld", "#MedievalTimes", "#MedievalLore", "#MedievalLegends", "#MedievalAesthetic", "#MedievalVibes", "#KnightSaga", "#EpicKnights", "#FantasyKnights", "#DarkMedieval", "#GothicMedieval", "#MedievalCastle", "#AncientKingdoms", "#LegendaryBattles", "#MedievalMythology", "#ChivalryEra", "#MedievalTales", "#MedievalArmor", "#MedievalWarfare", "#MedievalRealms", "#MiddleAges", "#MedievalKingdom", "#MedievalHistory", "#MedievalHeroes", "#MedievalBattles", "#SwordAndShield", "#KnightlyOrder", "#MythicKnights", "#MedievalLegends", "#RoyalDynasties", "#MedievalFantasyWorld", "#WarriorKing", "#MedievalMagic", "#ArcaneKnights", "#CastleRuins", "#AncientScrolls", "#LostKingdoms", "#ChivalricLegends", "#KnightsofHonor", "#FantasyWarlords", "#DarkAges", "#MedievalDreams", "#ImmersiveMedieval", "#MedievalTournaments", "#NobleKnights", "#MedievalFolklore", "#GothicCastles", "#FabledRealms"
+];
+
+const titlePatterns = [
+    "✨ {emoji} {adjective} {noun} in {environment} {emoji} ✨ {hashtags}",
+    "🌟 {emoji} {verb} with {adjective} {noun} in {environment} {emoji} 🌟 {hashtags}",
+    "🌸 {emoji} A {adjective} {noun} {verb} in {environment} {emoji} 🌸 {hashtags}",
+    "🎌 {emoji} The {adjective} {noun} of {environment} {emoji} 🎌 {hashtags}",
+    "🎨 {emoji} {adjective} {noun} {verb} under {environment} {emoji} 🎨 {hashtags}",
+    "⚔️ {emoji} {adjective} {noun} {verb} amidst {environment} {emoji} ⚔️ {hashtags}",
+    "📺 {emoji} {adjective} {noun} {verb} within {environment} {emoji} 📺 {hashtags}",
+    "🎮 {emoji} {adjective} {noun} {verb} surrounded by {environment} {emoji} 🎮 {hashtags}"
+];
 
 const keywords = {
-    environments: [
-        "medieval castle", "dark forest", "ancient ruins", "stone fortress", "mystic village", "dragon's lair", "enchanted woods",
-        "gothic cathedral", "haunted graveyard", "royal palace", "wizard's tower", "battlefield", "mountain stronghold", "hidden cave",
-        "cursed swamp", "viking village", "medieval town square", "knight's keep", "ancient library", "forgotten temple", "dwarven mine",
-        "elven sanctuary", "witch's hut", "royal court", "dark dungeon", "enchanted lake", "mystic portal", "ancient battlefield",
-        "shadowy valley", "frosted peaks", "deserted village", "cursed ruins", "sacred grove", "dragon's peak", "wizard's laboratory",
-        "haunted castle", "royal garden", "ancient crypt", "mystic waterfall", "enchanted meadow", "dark citadel", "knight's training ground",
-        "viking longhouse", "medieval marketplace", "ancient observatory", "forgotten shrine", "dwarven forge", "elven treehouse",
-        "witch's cauldron", "royal banquet hall", "dark catacombs", "enchanted river", "mystic glade", "ancient battlefield"
-    ],
     adjectives: [
         "dark", "mysterious", "ancient", "forgotten", "enchanted", "haunted", "cursed", "royal", "gothic", "shadowy",
         "frosted", "sacred", "dwarven", "elven", "wizardly", "knightly", "viking", "medieval", "mystic", "barbaric",
@@ -36,37 +44,15 @@ const keywords = {
         "build", "repair", "guard", "scout", "negotiate", "betray", "ally", "fight", "retreat", "advance",
         "celebrate", "mourn", "sacrifice", "bless", "curse", "heal", "revive", "summon", "banish", "teleport"
     ],
-    moodStyle: [
-        "dark and ominous", "mysterious and foreboding", "ancient and forgotten", "enchanted and magical", "haunted and cursed",
-        "royal and grandiose", "gothic and shadowy", "frosted and cold", "sacred and divine", "dwarven and sturdy",
-        "elven and ethereal", "wizardly and arcane", "knightly and chivalrous", "viking and barbaric", "medieval and rustic",
-        "mystic and spiritual", "heroic and legendary", "mythical and epic", "ominous and eerie", "ethereal and majestic",
-        "spiritual and divine", "arcane and sorcerous", "dragonborn and fierce", "warrior-like and brave", "chivalrous and noble",
-        "feudal and traditional", "rustic and timeless", "grandiose and majestic", "mystical and enchanting", "shadowed and dark",
-        "frostbitten and cold", "sacrosanct and holy", "dwarfish and strong", "elvish and graceful", "wizardly and wise",
-        "knightly and honorable", "viking and fierce", "medieval and historic", "mystic and otherworldly"
-    ],
-    technicalDescriptive: [
-        "dark details", "mysterious lighting", "gothic colors", "ethereal atmosphere", "ancient patterns", "forgotten textures",
-        "enchanted aura", "haunted details", "cursed contrasts", "royal edges", "gothic glow", "shadowy textures", "frosted environment",
-        "sacred color palette", "dwarven light effect", "elven look", "wizardly textures", "knightly glow", "viking atmosphere",
-        "medieval softness", "mystic vibrancy", "heroic warmth", "legendary polish", "mythical watery feel", "epic glistening",
-        "ominous richness", "ethereal tones", "majestic water-soaked", "spiritual filmic finish", "divine glittering hue",
-        "arcane soft glow", "sorcerous dreamlike light", "dragonborn blurred edges", "warrior-like softness", "chivalrous vibrant effect",
-        "feudal glimmering", "rustic sharp detailing", "timeless milky hues", "grandiose lush contrast", "mystical whispery effect",
-        "shadowed emollient texture", "frostbitten deep tones", "sacrosanct brushed light", "dwarfish clear-cut textures",
-        "elvish bright overlay", "wizardly playful edge", "knightly vibrating hues", "viking rich detail", "medieval sunny warmth",
-        "mystic aerial view", "heroic soft brushstrokes", "legendary shining contour", "mythical cool shadows", "epic color blends",
-        "ominous glassy texture", "ethereal vintage vibe"
-    ],
-    colors: [
-        "dark crimson", "midnight blue", "forest green", "obsidian black", "royal purple", "blood red", "emerald green", "golden yellow",
-        "silver gray", "bronze brown", "iron gray", "stone gray", "shadow black", "frost white", "sacred gold", "dwarven bronze",
-        "elven silver", "wizardly purple", "knightly red", "viking blue", "medieval brown", "mystic green", "heroic gold", "legendary silver",
-        "mythical bronze", "epic crimson", "ominous black", "ethereal white", "majestic purple", "spiritual gold", "divine silver",
-        "arcane green", "sorcerous blue", "dragonborn red", "warrior-like black", "chivalrous gold", "feudal silver", "rustic brown",
-        "timeless gray", "grandiose purple", "mystical green", "shadowed black", "frostbitten white", "sacrosanct gold", "dwarfish bronze",
-        "elvish silver", "wizardly purple", "knightly red", "viking blue", "medieval brown", "mystic green"
+    environments: [
+        "medieval castle", "dark forest", "ancient ruins", "stone fortress", "mystic village", "dragon's lair", "enchanted woods",
+        "gothic cathedral", "haunted graveyard", "royal palace", "wizard's tower", "battlefield", "mountain stronghold", "hidden cave",
+        "cursed swamp", "viking village", "medieval town square", "knight's keep", "ancient library", "forgotten temple", "dwarven mine",
+        "elven sanctuary", "witch's hut", "royal court", "dark dungeon", "enchanted lake", "mystic portal", "ancient battlefield",
+        "shadowy valley", "frosted peaks", "deserted village", "cursed ruins", "sacred grove", "dragon's peak", "wizard's laboratory",
+        "haunted castle", "royal garden", "ancient crypt", "mystic waterfall", "enchanted meadow", "dark citadel", "knight's training ground",
+        "viking longhouse", "medieval marketplace", "ancient observatory", "forgotten shrine", "dwarven forge", "elven treehouse",
+        "witch's cauldron", "royal banquet hall", "dark catacombs", "enchanted river", "mystic glade", "ancient battlefield"
     ]
 };
 
@@ -98,8 +84,40 @@ const endings = [
     "where the druids protect the balance.", "where the sorcerers unleash their power.", "where the undead seek vengeance.", "where the living fight for survival."
 ];
 
-function getRandomElement(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+function getRandomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function selectHashtags(count) {
+    const selectedHashtags = ["#aiart", "#midjourney"];
+    while (selectedHashtags.length < count) {
+        const randomHashtag = getRandomElement(hashtags);
+        if (!selectedHashtags.includes(randomHashtag)) {
+            selectedHashtags.push(randomHashtag);
+        }
+    }
+    return selectedHashtags;
+}
+
+function generateTitle() {
+    const pattern = getRandomElement(titlePatterns);
+    const randomEmojis = [getRandomElement(emojis), getRandomElement(emojis)];
+    const adjective = getRandomElement(keywords.adjectives);
+    const noun = getRandomElement(keywords.nouns);
+    const verb = getRandomElement(keywords.verbs);
+    const environment = getRandomElement(keywords.environments);
+    const randomHashtags = selectHashtags(6).join(" ");
+
+    const title = pattern
+        .replace("{emoji}", randomEmojis[0])
+        .replace("{adjective}", adjective)
+        .replace("{noun}", noun)
+        .replace("{verb}", verb)
+        .replace("{environment}", environment)
+        .replace("{emoji}", randomEmojis[1])
+        .replace("{hashtags}", randomHashtags);
+
+    return title;
 }
 
 function generatePrompt() {
@@ -113,10 +131,14 @@ function generatePrompt() {
     // Add negative prompt if provided
     const negativePrompt = negativePromptInput.value.trim();
     if (negativePrompt) {
-        prompt += ` --no ${negativePrompt}`; // Adiciona o negative prompt exatamente como foi digitado
+        prompt += ` --no ${negativePrompt}`;
     }
 
     promptArea.textContent = prompt;
+
+    // Gera e exibe o título
+    const title = generateTitle();
+    generatedTitle.value = title;
 }
 
 generateButton.addEventListener('click', generatePrompt);
