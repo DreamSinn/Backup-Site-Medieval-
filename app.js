@@ -21,6 +21,7 @@ const titlePatterns = [
     "🎮 {emoji} {adjective} {noun} {verb} surrounded by {environment} {emoji} 🎮 {hashtags}"
 ];
 
+// Área para colar as keywords posteriormente
 const keywords = {
     adjectives: [
         "dark", "mysterious", "ancient", "forgotten", "enchanted", "haunted", "cursed", "royal", "gothic", "shadowy",
@@ -148,6 +149,19 @@ promptArea.addEventListener('click', () => {
     const promptText = promptArea.textContent;
     if (promptText) {
         navigator.clipboard.writeText(promptText).then(() => {
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        });
+    }
+});
+
+// Copiar o título ao clicar na área do título
+generatedTitle.addEventListener('click', () => {
+    const titleText = generatedTitle.value;
+    if (titleText) {
+        navigator.clipboard.writeText(titleText).then(() => {
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
